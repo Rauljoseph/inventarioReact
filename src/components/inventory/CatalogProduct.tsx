@@ -15,8 +15,12 @@ export const CatalogProducts = () => {
       try {
         const gettingListProducts = await getCatalogProduct();
         setListProducts(gettingListProducts);
-      } catch (error: any) {
-        setErrorMessage(error.message || "Error al obtener los productos.");
+      } catch (error) {
+        if (error instanceof Error) {
+            setErrorMessage(error.message || "Error al obtener los productos.");
+          } else {
+            setErrorMessage("Error desconocido al obtener los productos.");
+          }
       }
     };
 

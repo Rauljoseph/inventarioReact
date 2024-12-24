@@ -7,8 +7,6 @@ import { createProduct } from "../../api/createProduct";
 import Spinner from "react-bootstrap/Spinner";
 import { Product } from "../../interfaces/product";
 const CreateProduct = () => {
- 
-
   const [product, setProduct] = useState<Product>({
     name: "",
     description: "",
@@ -45,8 +43,12 @@ const CreateProduct = () => {
         stock: 0,
         category: "",
       });
-    } catch (err: any) {
-      setErrorMessage(err);
+    } catch (err) {
+      if (err instanceof Error) {
+        setErrorMessage(err.message || "Error al obtener los productos.");
+      } else {
+        setErrorMessage("Error desconocido al obtener los productos.");
+      }
     } finally {
       setIsLoading(false);
     }

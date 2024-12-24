@@ -8,13 +8,21 @@ interface Product {
   category?: string;
 }
 
-const API_URL = "https://stage-micro-products.onrender.com/products";
+const API_URL = import.meta.env.VITE_MICRO_PRODUCTS;
+
+if (!API_URL) {
+  throw new Error("La variable de entorno MICRO_PRODUCTS no está definida.");
+}
 
 export const createProduct = async (product: Product) => {
   try {
     const response = await axios.post(API_URL, product);
     return response.data;
-  } catch (error: any) {
-    throw error.response?.data?.message || "Error al crear el producto.";
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw error.response?.data?.message || "Error al crear el producto.";
+    } else {
+      throw "Ocurrió un error desconocido.";
+    }
   }
 };
