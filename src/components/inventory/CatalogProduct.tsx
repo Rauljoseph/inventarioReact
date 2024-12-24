@@ -58,8 +58,8 @@ export const CatalogProducts = () => {
           </thead>
           <tbody>
             {listProducts.map((product, index) => (
-              <tr key={product.id}>
-                <td>{product.id}</td>
+              <tr key={index}>
+                <td>{index + 1}</td>
                 <td>{product.name}</td>
                 <td>{product.description}</td>
                 <td>${product.price}</td>

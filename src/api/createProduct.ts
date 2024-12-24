@@ -8,7 +8,7 @@ interface Product {
   category?: string;
 }
 
-const API_URL = "http://localhost:3000/products/";
+const API_URL = "https://stage-micro-products.onrender.com/products";
 
 export const createProduct = async (product: Product) => {
   try {
